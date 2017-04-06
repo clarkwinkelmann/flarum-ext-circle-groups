@@ -1,0 +1,41 @@
+{
+    "name": "clarkwinkelmann/flarum-ext-circle-groups",
+    "description": "Add a color circle around avatars based on user group",
+    "keywords": [
+        "extension",
+        "flarum",
+        "design",
+        "groups"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Clark Winkelmann",
+            "email": "clark.winkelmann@gmail.com",
+            "homepage": "https://clarkwinkelmann.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/clarkwinkelmann/flarum-ext-circle-groups/issues",
+        "source": "https://github.com/clarkwinkelmann/flarum-ext-circle-groups"
+    },
+    "require": {
+        "flarum/core": "^0.1.0-beta.6"
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Color Circles",
+            "icon": {
+                "name": "circle-o",
+                "backgroundColor": "#B72A2A",
+                "color": "#FFF"
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "ClarkWinkelmann\\CircleGroups\\": "src/"
+        }
+    }
+}
