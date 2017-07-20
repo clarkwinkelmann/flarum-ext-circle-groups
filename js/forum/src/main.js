@@ -17,7 +17,8 @@ app.initializers.add('clarkwinkelmann-circle-groups', () => {
             .children.find(matchTag('a'))
             .children.find(matchClass('Avatar PostUser-avatar'));
 
-        if (badges.length) {
+        // Only add the colored border if the user has a badge that has a hard-coded background color
+        if (badges.length && badges[0].props.style && badges[0].props.style.backgroundColor) {
             avatar.attrs = avatar.attrs || {};
             avatar.attrs.style = avatar.attrs.style || {};
             avatar.attrs.style.borderColor = badges[0].props.style.backgroundColor;
