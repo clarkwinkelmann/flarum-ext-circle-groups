@@ -1,8 +1,8 @@
-import { extend } from 'flarum/extend';
+import {extend} from 'flarum/extend';
 import PostUser from 'flarum/components/PostUser';
 
 app.initializers.add('clarkwinkelmann-circle-groups', () => {
-    extend(PostUser.prototype, 'view', function(vnode) {
+    extend(PostUser.prototype, 'view', function (vnode) {
         const badges = this.props.post.user().badges().toArray();
 
         const matchTag = tag => {

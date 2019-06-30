@@ -13,7 +13,7 @@
         {
             "name": "Clark Winkelmann",
             "email": "clark.winkelmann@gmail.com",
-            "homepage": "https://clarkwinkelmann.com"
+            "homepage": "https://clarkwinkelmann.com/"
         }
     ],
     "support": {
@@ -21,21 +21,19 @@
         "source": "https://github.com/clarkwinkelmann/flarum-ext-circle-groups"
     },
     "require": {
-        "flarum/core": "^0.1.0-beta.6"
+        "flarum/core": "^0.1.0-beta.8"
     },
     "extra": {
         "flarum-extension": {
             "title": "Color Circles",
             "icon": {
-                "name": "circle-o",
-                "backgroundColor": "#B72A2A",
-                "color": "#FFF"
+                "name": "far fa-circle",
+                "backgroundColor": "#b72a2a",
+                "color": "#fff"
             }
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "ClarkWinkelmann\\CircleGroups\\": "src/"
+        },
+        "flagrow": {
+            "discuss": "https://discuss.flarum.org/d/20544"
         }
     }
 }
