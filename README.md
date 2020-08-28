@@ -12,7 +12,18 @@ To install the latest version compatible with your forum:
 
     composer require clarkwinkelmann/flarum-ext-circle-groups
 
+## Support
+
+This extension is under **active maintenance**.
+
+Bugfixes and compatibility updates will be published for free as time allows.
+
+You can [contact me](https://clarkwinkelmann.com/flarum) to sponsor additional features.
+
+Support is offered on a "best effort" basis through the Flarum community thread.
+
 ## Links
 
-- [Source code on GitHub](https://github.com/clarkwinkelmann/flarum-ext-circle-groups)
-- [Download via Packagist](https://packagist.org/packages/clarkwinkelmann/flarum-ext-circle-groups)
+- [GitHub](https://github.com/clarkwinkelmann/flarum-ext-circle-groups)
+- [Packagist](https://packagist.org/packages/clarkwinkelmann/flarum-ext-circle-groups)
+- [Discuss](https://discuss.flarum.org/d/20544)
