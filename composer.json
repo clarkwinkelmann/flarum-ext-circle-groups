@@ -18,7 +18,8 @@
     ],
     "support": {
         "issues": "https://github.com/clarkwinkelmann/flarum-ext-circle-groups/issues",
-        "source": "https://github.com/clarkwinkelmann/flarum-ext-circle-groups"
+        "source": "https://github.com/clarkwinkelmann/flarum-ext-circle-groups",
+        "forum": "https://discuss.flarum.org/d/20544"
     },
     "require": {
         "flarum/core": "^0.1.0-beta.14"
@@ -26,6 +27,7 @@
     "extra": {
         "flarum-extension": {
             "title": "Color Circles",
+            "category": "theme",
             "icon": {
                 "name": "far fa-circle",
                 "backgroundColor": "#b72a2a",
