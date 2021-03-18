@@ -1,7 +1,35 @@
 import app from 'flarum/app';
 import {extend} from 'flarum/extend';
+import AvatarEditor from 'flarum/components/AvatarEditor';
 import PostUser from 'flarum/components/PostUser';
+import UserCard from 'flarum/components/UserCard';
 import Link from 'flarum/components/Link';
+
+function matchTag(tag) {
+    return node => node && node.tag && node.tag === tag;
+}
+
+function matchClass(className) {
+    // trim() to handle classNames that end with spaces easier
+    return node => node && node.attrs && node.attrs.className && node.attrs.className.trim() === className;
+}
+
+function applyColor(vdom, user) {
+    // Find the first group that has a color
+    // We don't read badges because we would need to support every badge component and its attrs
+    const firstColoredGroup = user.groups().find(group => {
+        return group.color();
+    });
+
+    // If there are no color groups, skip
+    if (!firstColoredGroup) {
+        return;
+    }
+
+    vdom.attrs = vdom.attrs || {};
+    vdom.attrs.style = vdom.attrs.style || {};
+    vdom.attrs.style.borderColor = firstColoredGroup.color();
+}
 
 app.initializers.add('clarkwinkelmann-circle-groups', () => {
     extend(PostUser.prototype, 'view', function (vnode) {
@@ -12,31 +40,33 @@ app.initializers.add('clarkwinkelmann-circle-groups', () => {
             return;
         }
 
-        // Find the first group that has a color
-        // We don't read badges because we would need to support every badge component and its attrs
-        const firstColoredGroup = user.groups().find(group => {
-            return group.color();
-        });
-
-        // If there are no color groups, skip
-        if (!firstColoredGroup) {
-            return;
-        }
-
-        const matchTag = tag => {
-            return node => node && node.tag && node.tag === tag;
-        };
-
-        const matchClass = className => {
-            return node => node && node.attrs && node.attrs.className && node.attrs.className === className;
-        };
-
         const avatar = vnode.children.find(matchTag('h3'))
             .children.find(matchTag(Link))
             .children.find(matchClass('Avatar PostUser-avatar'));
 
-        avatar.attrs = avatar.attrs || {};
-        avatar.attrs.style = avatar.attrs.style || {};
-        avatar.attrs.style.borderColor = firstColoredGroup.color();
+        applyColor(avatar, user);
+    });
+
+    extend(UserCard.prototype, 'view', function (vnode) {
+        const identity = vnode.children.find(matchClass('darkenBackground'))
+            .children.find(matchClass('container'))
+            .children.find(matchClass('UserCard-profile'))
+            .children.find(matchClass('UserCard-identity'));
+
+        // This component will only exist if we are not in edit mode
+        if (identity.children[0].tag === Link) {
+            const avatar = identity.children[0]
+                .children.find(matchClass('UserCard-avatar'))
+                .children.find(matchClass('Avatar'));
+
+            applyColor(avatar, this.attrs.user);
+        }
+    });
+
+    // We color the avatar editor because it's what users see on their own profile, or admins everywhere
+    extend(AvatarEditor.prototype, 'view', function (vnode) {
+        const avatar = vnode.children.find(matchClass('Avatar'));
+
+        applyColor(avatar, this.attrs.user);
     });
 });
