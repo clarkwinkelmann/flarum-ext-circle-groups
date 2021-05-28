@@ -1,9 +1,9 @@
-import app from 'flarum/app';
-import {extend} from 'flarum/extend';
-import AvatarEditor from 'flarum/components/AvatarEditor';
-import PostUser from 'flarum/components/PostUser';
-import UserCard from 'flarum/components/UserCard';
-import Link from 'flarum/components/Link';
+import app from 'flarum/forum/app';
+import {extend} from 'flarum/common/extend';
+import AvatarEditor from 'flarum/forum/components/AvatarEditor';
+import PostUser from 'flarum/forum/components/PostUser';
+import UserCard from 'flarum/forum/components/UserCard';
+import Link from 'flarum/common/components/Link';
 
 function matchTag(tag) {
     return node => node && node.tag && node.tag === tag;
