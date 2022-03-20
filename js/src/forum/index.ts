@@ -1,24 +1,34 @@
+import {Vnode} from 'mithril';
 import app from 'flarum/forum/app';
 import {extend} from 'flarum/common/extend';
+import User from 'flarum/common/models/User';
 import AvatarEditor from 'flarum/forum/components/AvatarEditor';
 import PostUser from 'flarum/forum/components/PostUser';
 import UserCard from 'flarum/forum/components/UserCard';
 import Link from 'flarum/common/components/Link';
 
-function matchTag(tag) {
-    return node => node && node.tag && node.tag === tag;
+function matchTag(tag: any): (node: Vnode) => boolean {
+    return node => !!(node && node.tag && node.tag === tag);
 }
 
-function matchClass(className) {
+function matchClass(className: string): (node: Vnode<any>) => boolean {
     // trim() to handle classNames that end with spaces easier
     return node => node && node.attrs && node.attrs.className && node.attrs.className.trim() === className;
 }
 
-function applyColor(vdom, user) {
+function applyColor(vdom: Vnode<any>, user: User): void {
+    const groups = user.groups();
+
+    // If a user has no groups or groups have not been loaded, false might be returned
+    // We'll skip this part if this happens
+    if (!Array.isArray(groups)) {
+        return;
+    }
+
     // Find the first group that has a color
     // We don't read badges because we would need to support every badge component and its attrs
-    const firstColoredGroup = user.groups().find(group => {
-        return group.color();
+    const firstColoredGroup = groups.find(group => {
+        return group && group.color();
     });
 
     // If there are no color groups, skip
